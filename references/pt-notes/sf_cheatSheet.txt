@@ -1,0 +1,16 @@
+
+-- To create a stage from the local CSV file
+put file://C:\pt_code\sf_training\getting-started\employees0*.csv @sf_tuts.public.%emp_basic;
+
+-- To load the data from the stage into the table
+copy into emp_basic
+  from @%emp_basic
+  file_format = (type = csv field_optionally_enclosed_by='"')
+  pattern = '.*employees0[1-5].csv.gz'
+  on_error = 'skip_file';
+
+-- To disconnect to DB from command line
+  snowsql -c <connection_Name_In_Config>
+
+-- To disconnect to DB from command line
+!disconnect or !quit
